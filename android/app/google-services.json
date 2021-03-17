@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "486865627594",
+    "project_id": "gestion-des-absences-esi",
+    "storage_bucket": "gestion-des-absences-esi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486865627594:android:39c9e76dfd4e16cef7c733",
+        "android_client_info": {
+          "package_name": "com.esiabs.jta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486865627594-3fm1a9pd4ojrspg1u8chhdpht6hqkb67.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOgLIAmM0szMLbV0GuHYGwiso1w_bxG2k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486865627594-3fm1a9pd4ojrspg1u8chhdpht6hqkb67.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
