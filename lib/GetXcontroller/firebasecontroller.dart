@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:get/get.dart';
-
 import 'package:jta/screens/home/home.dart';
 import 'package:jta/screens/login.dart';
 
@@ -41,4 +39,6 @@ class FirebaseController extends GetxController {
       return null;
     }
   }
+
+  void profichange() {}
 }
