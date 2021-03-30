@@ -4,10 +4,6 @@ import 'package:get/get.dart';
 import 'package:jta/InstanceBinding.dart';
 import 'package:jta/IsSignedIN.dart';
 
-import 'package:jta/screens/login.dart';
-
-import 'screens/home.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -27,8 +23,7 @@ class MyApp extends StatelessWidget {
       ),
       home: IsSignedIn(),
       routes: {
-        '/login': (context) => Login(),
-        '/dashboard': (context) => Home(),
+        '/login': (context) => IsSignedIn(),
       },
     );
   }

@@ -57,13 +57,23 @@ class Login extends GetWidget<FirebaseController> {
         Padding(
           //
           padding: const EdgeInsets.all(30.0),
-          child: Text(
-            //the probleme was here !!!
-            "Gestion des Absences",
-            style: TextStyle(
-                fontSize: size.getSizeInPx(30),
-                fontWeight: FontWeight.bold,
-                color: Colors.white),
+          child: Row(
+            children: [
+              Text(
+                "ESI APP",
+                style: TextStyle(
+                    fontSize: size.getSizeInPx(30),
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Image.asset(
+                "assets/images/esi.png",
+                scale: 8,
+              )
+            ],
           ),
         ),
       ],
@@ -124,55 +134,7 @@ class Login extends GetWidget<FirebaseController> {
                   child: Text("LOGIN",
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold)),
-                ))
-
-            // GestureDetector(
-            //   onTap: () async {
-            //     print("Login Clicked Event");
-            //     _login();
-            // dynamic result = await _auth.signInAnonym();
-            // ss = result.uid;
-            // if (result == null) {
-            //   print("error");
-            // } else {
-            //   print("Loged in sucsessfuly!!");
-            //   print(result.uid);
-            //   showDialog(
-            //       context: context,
-            //       builder: (BuildContext context) =>
-            //           _buildPopupDialog(context));
-            // }
-            //   },
-            //   child: Container(
-            //     width: 150,
-            //     height: 40,
-            //     decoration: BoxDecoration(
-            //         boxShadow: [
-            //           BoxShadow(
-            //             color: Colors.black,
-            //             blurRadius:
-            //                 15.0, // has the effect of softening the shadow
-            //             spreadRadius:
-            //                 -18.5, // has the effect of extending the shadow
-            //             offset: Offset(
-            //               6.0, // horizontal, move right 10
-            //               20.0, // vertical, move down 10
-            //             ),
-            //           )
-            //         ],
-            //         borderRadius: BorderRadius.all(Radius.circular(22)),
-            //         color: Color(0xff2470c7)),
-            //     child: Center(
-            //         child: Text('LOGIN',
-            //             style: TextStyle(
-            //                 color: Colors.white, fontWeight: FontWeight.bold)
-            //             // style: Theme.of(context).textTheme.headline6.copyWith(
-            //             //       color: Colors.white,
-            //             //     ),
-            //             )),
-            //   ),
-            // ),
-            ),
+                ))),
       ],
     );
   }
@@ -215,7 +177,7 @@ class Login extends GetWidget<FirebaseController> {
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.only(top: 35.0),
-                          child: Text("Bienvenu ESi talent",
+                          child: Text("Bienvenu sur ESi APP",
                               style: TextStyle(fontSize: size.getSizeInPx(20)
                                   //  MediaQuery.of(context).size.height / 30
                                   )),

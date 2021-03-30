@@ -80,7 +80,9 @@ class Home extends GetWidget<FirebaseController> {
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold)),
                         GestureDetector(
-                          onTap: () => Get.to(Profil()),
+                          onTap: () {
+                            Get.to(Etudiants());
+                          },
                           child: Icon(
                             Icons.navigate_next_outlined,
                             size: 35,
@@ -223,86 +225,20 @@ class EntryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return _buildTiles(entry);
   }
-  //  SingleChildScrollView(
-  //   child: Column(
-  //     children: [
-  //       Container(
-  //         height: 50,
-  //         color: Colors.grey[300],
-  //         width: double.infinity,
-  //         child: Padding(
-  //           padding: const EdgeInsets.all(8.0),
-  //           child: Row(
-  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //             children: [
-  //               Text(
-  //                 "Groupe :SIT3",
-  //                 style: TextStyle(
-  //                     fontWeight: FontWeight.bold, color: Colors.black),
-  //               ),
-  //               Text(
-  //                 "TD/Cours :ASI",
-  //                 style: TextStyle(
-  //                     fontWeight: FontWeight.bold, color: Colors.black),
-  //               ),
-  //               Text(
-  //                 "heure :14-16",
-  //                 style: TextStyle(
-  //                     fontWeight: FontWeight.bold, color: Colors.black),
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //       ),
-  //       SizedBox(
-  //         height: 5,
-  //       ),
-  //       Etudiant(),
-  //       Etudiant(),
-  //       Etudiant(),
-  //       Etudiant(),
-  //       Etudiant(),
-  //       Etudiant(),
-  //       Etudiant(),
-  //       Etudiant(),
-  //     ],
-  //   ),
-  // )
-  //Column(
-  //   crossAxisAlignment: CrossAxisAlignment.center,
-  //   children: [
-  //     SizedBox(
-  //       height: 30,
-  //     ),
-  //     Center(
-  //       child: Text("super you are connected"),
-  //     ),
-  //     SizedBox(
-  //       height: 30,
-  //     ),
-  //     RaisedButton(
-  //       onPressed: () {
-  //         controller.signOut();
-  //       },
-  //       child: Text("GetOut"),
-  //     )
-  //   ],
-  // ),
-  //     ,
-  //   );
-  // }
 }
 
 class Etudiant extends StatelessWidget {
   final String nom;
   final String prenom;
   final String email;
+  final bool absent;
 
   const Etudiant({
     Key key,
     this.nom,
     this.prenom,
     this.email,
+    this.absent,
   }) : super(key: key);
   void customLancher(commande) async {
     if (await canLaunch(commande)) {
@@ -319,7 +255,7 @@ class Etudiant extends StatelessWidget {
       child: GestureDetector(
         onLongPress: () {
           customLancher(
-              'mailto:etudiant2@esi.dz?subject=test%20subject&body=test%20body');
+              'mailto:$email?subject=test%20subject&body=test%20body');
         },
         child: Container(
             margin: EdgeInsets.all(5),
@@ -333,7 +269,7 @@ class Etudiant extends StatelessWidget {
             child: Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(6.0),
                   child: Icon(
                     Icons.person,
                     size: 50,
@@ -342,27 +278,49 @@ class Etudiant extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(14.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Nom : $nom",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.black),
-                      ),
-                      SizedBox(
-                        height: 2.8,
-                      ),
-                      Text(
-                        "Prénom : $prenom ",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.black),
-                      ),
-                    ],
+                  child: Container(
+                    width: 130,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              "Nom: ",
+                              style: TextStyle(color: Colors.black),
+                            ),
+                            Text(
+                              "$nom",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 2.8,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              "Prénom: ",
+                              style: TextStyle(color: Colors.black),
+                            ),
+                            Text(
+                              "$prenom",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+                                  color: Colors.black),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 120.0),
+                  padding: const EdgeInsets.only(left: 70.0, right: 10),
                   child: ValueBuilder<bool>(
                     initialValue: false,
                     builder: (isChecked, updateFn) => Switch(

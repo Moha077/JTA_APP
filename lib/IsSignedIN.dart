@@ -12,13 +12,13 @@ class IsSignedIn extends GetWidget<FirebaseController> {
   Widget build(BuildContext context) {
     return Obx(() {
       return (Get.find<FirebaseController>().user != null)
-          ? Login()
-          : GetBuilder<ControlleViewModel>(
+          ? GetBuilder<ControlleViewModel>(
               builder: (controller) => Scaffold(
                 body: controller.currentScreen,
                 bottomNavigationBar: bottomNavigationBar(),
               ),
-            );
+            )
+          : Login();
     });
   }
 
@@ -30,7 +30,7 @@ class IsSignedIn extends GetWidget<FirebaseController> {
           BottomNavigationBarItem(
               activeIcon: Padding(
                 padding: const EdgeInsets.only(top: 25.0),
-                child: Text('Enseignement',
+                child: Text('Accueil',
                     style: TextStyle(
                         color: Colors.blue, fontWeight: FontWeight.bold)),
               ),
