@@ -6,7 +6,7 @@ import 'package:jta/IsSignedIN.dart';
 
 import 'package:jta/screens/login.dart';
 
-import 'screens/home/home.dart';
+import 'screens/home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

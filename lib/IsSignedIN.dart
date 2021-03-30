@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:jta/GetXcontroller/firebasecontroller.dart';
-import 'package:jta/screens/home/home.dart';
+import 'package:jta/screens/home.dart';
 import 'package:jta/screens/login.dart';
 import 'package:jta/screens/profil.dart';
 
-import 'GetXcontroller/home_view_model.dart';
+import 'GetXcontroller/controlle_view_model.dart';
 
 class IsSignedIn extends GetWidget<FirebaseController> {
   @override
@@ -13,7 +13,7 @@ class IsSignedIn extends GetWidget<FirebaseController> {
     return Obx(() {
       return (Get.find<FirebaseController>().user != null)
           ? Login()
-          : GetBuilder<HomeViewModel>(
+          : GetBuilder<ControlleViewModel>(
               builder: (controller) => Scaffold(
                 body: controller.currentScreen,
                 bottomNavigationBar: bottomNavigationBar(),
@@ -23,22 +23,21 @@ class IsSignedIn extends GetWidget<FirebaseController> {
   }
 
   Widget bottomNavigationBar() {
-    return GetBuilder<HomeViewModel>(
-      init: HomeViewModel(),
+    return GetBuilder<ControlleViewModel>(
+      init: ControlleViewModel(),
       builder: (controller) => BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
               activeIcon: Padding(
                 padding: const EdgeInsets.only(top: 25.0),
-                child: Text('Profil',
+                child: Text('Enseignement',
                     style: TextStyle(
                         color: Colors.blue, fontWeight: FontWeight.bold)),
               ),
               label: '',
               icon: Padding(
-                padding: const EdgeInsets.only(top: 20.0),
-                child: Icon(Icons.timelapse_rounded),
-              )),
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: Icon(Icons.library_books))),
           BottomNavigationBarItem(
             activeIcon: Padding(
               padding: const EdgeInsets.only(top: 25.0),

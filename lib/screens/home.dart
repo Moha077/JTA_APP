@@ -2,18 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:jta/GetXcontroller/firebasecontroller.dart';
-import 'package:jta/GetXcontroller/home_view_model.dart';
+import 'package:jta/GetXcontroller/controlle_view_model.dart';
+import 'package:jta/screens/list_etd.dart';
 import 'package:jta/screens/profil.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Home extends GetWidget<FirebaseController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          elevation: 5,
-          centerTitle: true,
-          title: Text("Liste des étudiants"),
-        ),
+            backgroundColor: Colors.blueAccent,
+            elevation: 5,
+            centerTitle: true,
+            title: Text("ESI App"),
+            leading: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.asset(
+                "assets/images/esi.png",
+              ),
+            )),
         body: Column(
           children: [
             new Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
@@ -40,12 +48,22 @@ class Home extends GetWidget<FirebaseController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text("SIL 2",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 25)),
+                        Row(
+                          children: [
+                            Icon(Icons.timer),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text("00:55:23")
+                          ],
+                        ),
                       ],
                     ),
                     Text("commance à : 10:15 AM",
@@ -54,9 +72,22 @@ class Home extends GetWidget<FirebaseController> {
                     Text("",
                         style: TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold)),
-                    Text("Salle : 25",
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Salle : 25",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold)),
+                        GestureDetector(
+                          onTap: () => Get.to(Profil()),
+                          child: Icon(
+                            Icons.navigate_next_outlined,
+                            size: 35,
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
@@ -176,7 +207,7 @@ class EntryItem extends StatelessWidget {
         title: Text(root.title, style: TextStyle(fontWeight: FontWeight.w100)),
         onTap: () {
           print("taped");
-          Get.to(Profil());
+          Get.to(Etudiants());
         },
       );
 
@@ -263,68 +294,88 @@ class EntryItem extends StatelessWidget {
 }
 
 class Etudiant extends StatelessWidget {
+  final String nom;
+  final String prenom;
+  final String email;
+
   const Etudiant({
     Key key,
+    this.nom,
+    this.prenom,
+    this.email,
   }) : super(key: key);
+  void customLancher(commande) async {
+    if (await canLaunch(commande)) {
+      await launch(commande);
+    } else {
+      print("couldnt launch $commande");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container(
-          margin: EdgeInsets.all(5),
-          width: 360,
-          height: 65,
-          decoration: BoxDecoration(
-              color: Colors.blue[200],
-              borderRadius: BorderRadius.all(
-                Radius.circular(18),
-              )),
-          child: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.person,
-                  size: 50,
-                  color: Colors.white,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(14.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Nom : ",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.black),
-                    ),
-                    SizedBox(
-                      height: 2.8,
-                    ),
-                    Text(
-                      "Prénom : ",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.black),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 120.0),
-                child: ValueBuilder<bool>(
-                  initialValue: false,
-                  builder: (isChecked, updateFn) => Switch(
-                    activeTrackColor: Colors.lightGreenAccent,
-                    activeColor: Colors.green,
-                    value: isChecked,
-                    onChanged: (newValue) => updateFn(newValue),
+      child: GestureDetector(
+        onLongPress: () {
+          customLancher(
+              'mailto:etudiant2@esi.dz?subject=test%20subject&body=test%20body');
+        },
+        child: Container(
+            margin: EdgeInsets.all(5),
+            width: 360,
+            height: 65,
+            decoration: BoxDecoration(
+                color: Colors.blue[200],
+                borderRadius: BorderRadius.all(
+                  Radius.circular(18),
+                )),
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(
+                    Icons.person,
+                    size: 50,
+                    color: Colors.white,
                   ),
                 ),
-              ),
-            ],
-          )),
+                Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Nom : $nom",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.black),
+                      ),
+                      SizedBox(
+                        height: 2.8,
+                      ),
+                      Text(
+                        "Prénom : $prenom ",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.black),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 120.0),
+                  child: ValueBuilder<bool>(
+                    initialValue: false,
+                    builder: (isChecked, updateFn) => Switch(
+                      activeTrackColor: Colors.lightGreenAccent,
+                      activeColor: Colors.green,
+                      value: isChecked,
+                      onChanged: (newValue) => updateFn(newValue),
+                    ),
+                  ),
+                ),
+              ],
+            )),
+      ),
     );
   }
 }

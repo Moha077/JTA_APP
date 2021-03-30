@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jta/screens/home/home.dart';
+import 'package:jta/screens/home.dart';
 import 'package:jta/screens/profil.dart';
 
-class HomeViewModel extends GetxController {
+class ControlleViewModel extends GetxController {
   Widget _currentScreen = Home();
   int _navigatorValue = 0;
   get navigatoreValue => _navigatorValue;
